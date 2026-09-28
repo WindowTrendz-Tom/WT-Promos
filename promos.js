@@ -293,6 +293,23 @@
   };
 
   /* ---------- boot ---------- */
+  // Reserve space for each block straight away so the page doesn't jump when the promo appears.
+  function reserveSpace() {
+    if (document.getElementById('wt-promos-reserve')) return;
+    var s = document.createElement('style');
+    s.id = 'wt-promos-reserve';
+    s.textContent = [
+      '[data-wt-promos]:not([data-wt-ready]){display:block}',
+      '[data-wt-promos="banner"]:not([data-wt-ready]){min-height:58px}',
+      '[data-wt-promos="card"]:not([data-wt-ready]){min-height:360px}',
+      '[data-wt-promos="double"]:not([data-wt-ready]){min-height:230px}',
+      '[data-wt-promos="offers"]:not([data-wt-ready]){min-height:360px}',
+      '[data-wt-promos="page"]:not([data-wt-ready]){min-height:900px}',
+      '@media(max-width:700px){[data-wt-promos="card"]:not([data-wt-ready]){min-height:420px}[data-wt-promos="double"]:not([data-wt-ready]){min-height:480px}}'
+    ].join('\n');
+    document.head.appendChild(s);
+  }
+
   function addStyles() {
     if (document.getElementById('wt-promos-css')) return;
     var f = document.createElement('link');
@@ -320,6 +337,7 @@
       var fn = RENDER[el.getAttribute('data-wt-promos')];
       if (!fn) return;
       fn(el, data.offers);
+      el.setAttribute('data-wt-ready', '1');
       if (el.dataset.wtBound) return;
       el.dataset.wtBound = '1';
       el.addEventListener('click', function (e) {
@@ -342,7 +360,7 @@
     document.head.appendChild(s);
   }
 
-  function start() { loadData(renderAll); }
+  function start() { reserveSpace(); loadData(renderAll); }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
   else start();

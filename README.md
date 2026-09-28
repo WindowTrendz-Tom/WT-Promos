@@ -36,6 +36,19 @@ Tips:
 
 `data-offer` matches the `id` in offers.js. A card or banner hides itself when its offer ends. If one offer in a double card ends, the other shows on its own. The main promo is the first live `style: 'feature'` offer.
 
+## /offers page: search-friendly text
+
+Put this text *inside* the page placeholder. Search engines that don't run JavaScript read it; visitors never see it because the script replaces it with the styled page. It has no dates, so it doesn't need updating monthly.
+
+```html
+<div data-wt-promos="page">
+  <h1>Current Promotions</h1>
+  <p>Current promotions on curtains, blinds and shutters from Window Trendz, plus finance options. Made and installed locally in Manawatu and the Lower North Island. Book a free measure and quote to find out which offer suits your home.</p>
+</div>
+```
+
+Every block also reserves its space before it loads, so the page doesn't jump.
+
 ## Files
 
 - `offers.js` — the promo content. Edit this.

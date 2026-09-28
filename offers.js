@@ -35,6 +35,26 @@ window.WT_PROMOS = {
       banner: 'Free motorisation upgrade on blinds — worth around $210 a blind'
     },
 
+    // ---- OCTOBER 2026 DRAFT: hidden until 1 Oct. Check ends date and terms before this goes live. ----
+    {
+      id: 'curtain-making',
+      style: 'feature',            // takes over as the main promo when the motorisation offer ends on 30 Sep
+      starts: '2026-10-01',
+      ends: '2026-10-31',          // CONFIRM end date
+      tags: [],
+      title: 'Free curtain making on James Dunlop fabrics',
+      description: 'Choose a James Dunlop fabric for your curtains and we make them for free. Same quality, same local team measuring and installing, with the making cost taken off.',
+      worth: '',
+      image: '',                   // add a Squarespace image link here if you want a photo on this card
+      imageAlt: '',
+      buttonText: 'Book a free measure & quote',
+      buttonLink: '/free-quote',
+      mention: 'Mention the free curtain making offer when we visit.',
+      termsTitle: 'Terms apply',
+      terms: 'Available until 31 October 2026 on James Dunlop fabrics. Not available on existing orders, and cannot be used in conjunction with another offer on the same product.',   // CONFIRM terms
+      banner: 'Free curtain making on James Dunlop fabrics'
+    },
+
     {
       id: 'beat-quote',
       style: 'accent',
