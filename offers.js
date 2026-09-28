@@ -26,6 +26,7 @@ window.WT_PROMOS = {
       worth: 'Worth around $210 a blind',
       image: 'https://images.squarespace-cdn.com/content/v1/5f12259b5fdfd353a85c5f79/56f4c0b2-d649-4204-97ae-bb2f4bd6e70b/26-112+Churcher+Street-73.jpg?format=1000w',
       imageAlt: 'Motorised blinds in a Palmerston North living room',
+      imagePosition: 'center 35%',  // which part of the photo stays visible when cropped: 'center top', 'center 30%', 'center bottom'...
       buttonText: 'Book a free measure & quote',
       buttonLink: '/free-quote',
       mention: 'Mention the motorisation offer when we visit.',

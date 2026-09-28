@@ -159,7 +159,8 @@
         return '<span class="tag' + (t.soft ? ' soft' : '') + '">' + esc(t.text) + '</span>';
       }).join('');
     var img = o.image ? '<div class="ph"><img src="' + esc(o.image) + '" alt="' + esc(o.imageAlt) +
-      '" width="1000" height="667" decoding="async"' + (eager ? ' fetchpriority="high"' : ' loading="lazy"') + '></div>' : '';
+      '" width="1000" height="667" decoding="async"' +
+      (o.imagePosition ? ' style="object-position:' + esc(o.imagePosition) + '"' : '') + (eager ? ' fetchpriority="high"' : ' loading="lazy"') + '></div>' : '';
     var cls = ['offer'];
     if (o.style) cls.push(o.style);
     if (o.style === 'feature' && !o.image) cls.push('noimg');
