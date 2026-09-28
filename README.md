@@ -21,20 +21,23 @@ Tips:
 <script src="https://wt-promos.vercel.app/promos.js" defer></script>
 ```
 
-**Placeholders** — add a Code Block wherever promos should appear:
+**Placeholders** — add a Code Block wherever promos should appear. None of these name a specific promo, so they never need changing when offers change:
 
 | What | Code |
 |---|---|
+| Slim banner (main promo, links to /offers) | `<div data-wt-promos="banner"></div>` |
+| Single card: main promo | `<div data-wt-promos="card"></div>` |
+| Single card: second promo | `<div data-wt-promos="card" data-slot="secondary"></div>` |
+| Double card: main + second, no images | `<div data-wt-promos="double"></div>` |
+| Double card with images | `<div data-wt-promos="double" data-images="show"></div>` |
+| All offers as cards | `<div data-wt-promos="offers"></div>` |
 | Full /offers page | `<div data-wt-promos="page"></div>` |
-| Just the offer cards | `<div data-wt-promos="offers"></div>` |
-| Slim banner linking to /offers | `<div data-wt-promos="banner"></div>` |
-| Single card (the main promo) | `<div data-wt-promos="card"></div>` |
-| Double card (main promo + finance, side by side) | `<div data-wt-promos="double"></div>` |
-| Double card with images (default is no images) | `<div data-wt-promos="double" data-images="show"></div>` |
-| One specific offer | `<div data-wt-promos="card" data-offer="finance"></div>` |
-| Two specific offers | `<div data-wt-promos="double" data-offer="motorisation,finance"></div>` |
 
-`data-offer` matches the `id` in offers.js. A card or banner hides itself when its offer ends. If one offer in a double card ends, the other shows on its own. The main promo is the first live `style: 'feature'` offer.
+Main promo = first live `style: 'feature'` offer. Second promo = first live offer with `secondary: true`, otherwise the next live offer.
+
+Advanced: `data-offer="some-id"` pins a card to one offer by its `id` (e.g. `data-offer="finance"`), and `data-offer="id1,id2"` pins a double card. Avoid these on pages you don't want to revisit.
+
+A card or banner hides itself when its offer ends. If one offer in a double card ends, the other shows on its own.
 
 ## /offers page: search-friendly text
 

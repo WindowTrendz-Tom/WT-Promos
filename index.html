@@ -4,22 +4,55 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>WT Promos preview</title>
-<style>body{margin:0;padding:24px;background:#f2f2f2;font-family:sans-serif}h3{margin:32px 0 10px;color:#666;font-size:14px}</style>
+<style>
+body{margin:0;padding:24px;background:#f2f2f2;font-family:sans-serif}
+h3{margin:36px 0 6px;color:#333;font-size:15px}
+p.note{margin:0 0 10px;color:#666;font-size:13px}
+pre{margin:0 0 12px;padding:10px 14px;background:#22282a;color:#7fe4ee;border-radius:8px;font-size:13px;overflow-x:auto;white-space:pre-wrap}
+</style>
 </head>
 <body>
-<h3>Banner — data-wt-promos="banner"</h3>
+
+<h3>1. Banner</h3>
+<p class="note">Slim strip for the top of any page. Shows the main promo and links to /offers.</p>
+<pre>&lt;div data-wt-promos="banner"&gt;&lt;/div&gt;</pre>
 <div data-wt-promos="banner"></div>
-<h3>Single card (main promo) — data-wt-promos="card"</h3>
+
+<h3>2. Single card: main promo</h3>
+<p class="note">Always the current main promo. Changes by itself when offers.js changes.</p>
+<pre>&lt;div data-wt-promos="card"&gt;&lt;/div&gt;</pre>
 <div data-wt-promos="card" style="max-width:520px"></div>
-<h3>Double card (no images, default) — data-wt-promos="double"</h3>
+
+<h3>3. Single card: second promo</h3>
+<p class="note">The second promo (the one marked secondary in offers.js).</p>
+<pre>&lt;div data-wt-promos="card" data-slot="secondary"&gt;&lt;/div&gt;</pre>
+<div data-wt-promos="card" data-slot="secondary" style="max-width:520px"></div>
+
+<h3>4. Double card: main + second promo (no images)</h3>
+<p class="note">Two compact cards side by side. Text only by default.</p>
+<pre>&lt;div data-wt-promos="double"&gt;&lt;/div&gt;</pre>
 <div data-wt-promos="double"></div>
-<h3>Double card with images — data-images="show"</h3>
+
+<h3>5. Double card with images</h3>
+<pre>&lt;div data-wt-promos="double" data-images="show"&gt;&lt;/div&gt;</pre>
 <div data-wt-promos="double" data-images="show"></div>
-<h3>Full page — data-wt-promos="page"</h3>
+
+<h3>6. All offer cards</h3>
+<p class="note">Every live offer as cards, no page header.</p>
+<pre>&lt;div data-wt-promos="offers"&gt;&lt;/div&gt;</pre>
+<div data-wt-promos="offers"></div>
+
+<h3>7. Full /offers page</h3>
+<p class="note">Use the text inside so search engines can read it. The script replaces it with the styled page.</p>
+<pre>&lt;div data-wt-promos="page"&gt;
+  &lt;h1&gt;Current Promotions&lt;/h1&gt;
+  &lt;p&gt;Current promotions on curtains, blinds and shutters from Window Trendz, plus finance options. Made and installed locally in Manawatu and the Lower North Island. Book a free measure and quote to find out which offer suits your home.&lt;/p&gt;
+&lt;/div&gt;</pre>
 <div data-wt-promos="page">
   <h1>Current Promotions</h1>
   <p>Current promotions on curtains, blinds and shutters from Window Trendz, plus finance options. Made and installed locally in Manawatu and the Lower North Island. Book a free measure and quote to find out which offer suits your home.</p>
 </div>
+
 <script src="promos.js" defer></script>
 </body>
 </html>

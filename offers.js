@@ -7,6 +7,8 @@
    - Dates are 'YYYY-MM-DD'. Leave ends: '' for an offer with no end date.
    - starts: lets you load next month's offer early. It stays hidden
      until that date. Leave '' to show it straight away.
+   - secondary: true marks the offer that pairs with the main promo in
+     double cards and the 'secondary' card slot. No flag = next live offer.
    - Order on the page = order in this list. First "feature" offer is
      the big one at the top and the one shown in site-wide banners.
    ===================================================================== */
@@ -77,6 +79,7 @@ window.WT_PROMOS = {
     {
       id: 'finance',
       style: '',
+      secondary: true,
       starts: '',
       ends: '',
       tags: [ { text: 'Finance', soft: true } ],

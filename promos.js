@@ -10,9 +10,8 @@
      <div data-wt-promos="offers"></div>    just the offer cards
      <div data-wt-promos="banner"></div>    slim strip, links to /offers
      <div data-wt-promos="card"></div>                        the main promo
-     <div data-wt-promos="card" data-offer="finance"></div>   one offer by id
-     <div data-wt-promos="double"></div>                      main promo + finance, side by side
-     <div data-wt-promos="double" data-offer="motorisation,finance"></div>   pick both by id
+     <div data-wt-promos="card" data-slot="secondary"></div>  the second promo
+     <div data-wt-promos="double"></div>                      main + second promo, side by side
      <div data-wt-promos="double" data-images="show"></div>   double card with images (default is none)
    ===================================================================== */
 (function () {
@@ -187,6 +186,13 @@
     return active.filter(function (x) { return x.style === 'feature'; })[0] || active[0];
   }
 
+  // the second promo = first live offer marked secondary:true in offers.js, else the next live offer
+  function secondaryOffer(offers) {
+    var main = mainOffer(offers);
+    var rest = offers.filter(live).filter(function (x) { return x !== main; });
+    return rest.filter(function (x) { return x.secondary; })[0] || rest[0];
+  }
+
   function listHTML(offers) {
     // live offers first (in file order), finished ones at the bottom
     var shown = offers.filter(started);
@@ -256,7 +262,9 @@
 
     card: function (el, offers) {
       var id = el.getAttribute('data-offer');
-      var o = id ? offers.filter(function (x) { return x.id === id; })[0] : mainOffer(offers);
+      var slot = el.getAttribute('data-slot');
+      var o = id ? offers.filter(function (x) { return x.id === id; })[0]
+        : (slot === 'secondary' ? secondaryOffer(offers) : mainOffer(offers));
       if (!o || !live(o)) { el.innerHTML = ''; el.hidden = true; return; }
       el.innerHTML = '<div class="wto"><ul class="offers single">' +
         cardHTML(Object.assign({}, o, { style: o.style === 'feature' ? 'feature' : 'accent' }), false) + '</ul></div>';
@@ -268,8 +276,7 @@
       var ids = (el.getAttribute('data-offer') || '').split(',').map(function (x) { return x.trim(); }).filter(Boolean);
       var picks = ids.length
         ? ids.map(function (id) { return active.filter(function (x) { return x.id === id; })[0]; })
-        : [main, active.filter(function (x) { return x.id === 'finance'; })[0] ||
-            active.filter(function (x) { return x !== main; })[0]];
+        : [main, secondaryOffer(offers)];
       picks = picks.filter(Boolean).slice(0, 2);
       var noImg = el.getAttribute('data-images') !== 'show';
       if (!picks.length) { el.innerHTML = ''; el.hidden = true; return; }
