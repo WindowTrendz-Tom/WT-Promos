@@ -30,7 +30,7 @@ Tips:
 | Slim banner linking to /offers | `<div data-wt-promos="banner"></div>` |
 | Single card (the main promo) | `<div data-wt-promos="card"></div>` |
 | Double card (main promo + finance, side by side) | `<div data-wt-promos="double"></div>` |
-| Double card, no images | `<div data-wt-promos="double" data-images="none"></div>` |
+| Double card with images (default is no images) | `<div data-wt-promos="double" data-images="show"></div>` |
 | One specific offer | `<div data-wt-promos="card" data-offer="finance"></div>` |
 | Two specific offers | `<div data-wt-promos="double" data-offer="motorisation,finance"></div>` |
 
