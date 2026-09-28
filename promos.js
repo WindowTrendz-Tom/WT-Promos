@@ -13,6 +13,7 @@
      <div data-wt-promos="card" data-offer="finance"></div>   one offer by id
      <div data-wt-promos="double"></div>                      main promo + finance, side by side
      <div data-wt-promos="double" data-offer="motorisation,finance"></div>   pick both by id
+     <div data-wt-promos="double" data-images="none"></div>   double card with no images
    ===================================================================== */
 (function () {
   'use strict';
@@ -270,9 +271,12 @@
         : [main, active.filter(function (x) { return x.id === 'finance'; })[0] ||
             active.filter(function (x) { return x !== main; })[0]];
       picks = picks.filter(Boolean).slice(0, 2);
+      var noImg = el.getAttribute('data-images') === 'none';
       if (!picks.length) { el.innerHTML = ''; el.hidden = true; return; }
       el.innerHTML = '<div class="wto"><ul class="offers double' + (picks.length === 1 ? ' single' : '') + '">' +
-        picks.map(function (o) { return cardHTML(Object.assign({}, o, { style: 'accent' }), false); }).join('') + '</ul></div>';
+        picks.map(function (o) {
+          return cardHTML(Object.assign({}, o, { style: 'accent' }, noImg ? { image: '' } : {}), false);
+        }).join('') + '</ul></div>';
     },
 
     banner: function (el, offers) {
