@@ -29,6 +29,7 @@ Tips:
 | Single card: main promo | `<div data-wt-promos="card"></div>` |
 | Single card: second promo | `<div data-wt-promos="card" data-slot="secondary"></div>` |
 | Double card: main + second, no images | `<div data-wt-promos="double"></div>` |
+| Double card with "Current Promotions" title above | `<div data-wt-promos="double" data-heading="show"></div>` |
 | Double card with images | `<div data-wt-promos="double" data-images="show"></div>` |
 | All offers as cards | `<div data-wt-promos="offers"></div>` |
 | Full /offers page | `<div data-wt-promos="page"></div>` |

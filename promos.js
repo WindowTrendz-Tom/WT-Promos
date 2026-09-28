@@ -12,6 +12,7 @@
      <div data-wt-promos="card"></div>                        the main promo
      <div data-wt-promos="card" data-slot="secondary"></div>  the second promo
      <div data-wt-promos="double"></div>                      main + second promo, side by side
+     <div data-wt-promos="double" data-heading="show"></div>  same, with the Current Promotions title above
      <div data-wt-promos="double" data-images="show"></div>   double card with images (default is none)
    ===================================================================== */
 (function () {
@@ -193,6 +194,13 @@
     return rest.filter(function (x) { return x.secondary; })[0] || rest[0];
   }
 
+  // "Current Promotions" title block. h1 on the /offers page, h2 anywhere else so a page never has two h1s.
+  function headHTML(tag) {
+    return '<section class="panel"><div class="head"><p class="eyebrow">What\'s on</p>' +
+      '<' + tag + '>Current Promotions</' + tag + '>' +
+      '<p class="lede">We don\'t run a sale every week. When we do, it\'s a real saving and it has an end date on it.</p></div></section>';
+  }
+
   function listHTML(offers) {
     // live offers first (in file order), finished ones at the bottom
     var shown = offers.filter(started);
@@ -229,8 +237,7 @@
   var RENDER = {
     page: function (el, offers) {
       el.innerHTML = '<div class="wto">' +
-        '<section class="panel"><div class="head"><p class="eyebrow">What\'s on</p>' +
-        '<h1>Current Promotions</h1><p class="lede">We don\'t run a sale every week. When we do, it\'s a real saving and it has an end date on it.</p></div></section>' +
+        headHTML('h1') +
         listHTML(offers) +
         '<section class="strip below" aria-label="Why people choose Window Trendz"><ul class="row">' +
         '<li><div class="n">150+</div><div class="l">Five-star reviews</div></li>' +
@@ -280,7 +287,8 @@
       picks = picks.filter(Boolean).slice(0, 2);
       var noImg = el.getAttribute('data-images') !== 'show';
       if (!picks.length) { el.innerHTML = ''; el.hidden = true; return; }
-      el.innerHTML = '<div class="wto"><ul class="offers double' + (picks.length === 1 ? ' single' : '') + '">' +
+      el.innerHTML = '<div class="wto">' + (el.getAttribute('data-heading') === 'show' ? headHTML('h2') : '') +
+        '<ul class="offers double' + (picks.length === 1 ? ' single' : '') + '">' +
         picks.map(function (o) {
           return cardHTML(Object.assign({}, o, { style: 'accent' }, noImg ? { image: '' } : {}), false);
         }).join('') + '</ul></div>';
