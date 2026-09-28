@@ -28,9 +28,12 @@ Tips:
 | Full /offers page | `<div data-wt-promos="page"></div>` |
 | Just the offer cards | `<div data-wt-promos="offers"></div>` |
 | Slim banner linking to /offers | `<div data-wt-promos="banner"></div>` |
+| Single card (the main promo) | `<div data-wt-promos="card"></div>` |
+| Double card (main promo + finance, side by side) | `<div data-wt-promos="double"></div>` |
 | One specific offer | `<div data-wt-promos="card" data-offer="finance"></div>` |
+| Two specific offers | `<div data-wt-promos="double" data-offer="motorisation,finance"></div>` |
 
-`data-offer` matches the `id` in offers.js. A card or banner hides itself when its offer ends.
+`data-offer` matches the `id` in offers.js. A card or banner hides itself when its offer ends. If one offer in a double card ends, the other shows on its own. The main promo is the first live `style: 'feature'` offer.
 
 ## Files
 

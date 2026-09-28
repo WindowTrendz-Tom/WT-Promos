@@ -9,7 +9,10 @@
      <div data-wt-promos="page"></div>      full /offers page
      <div data-wt-promos="offers"></div>    just the offer cards
      <div data-wt-promos="banner"></div>    slim strip, links to /offers
+     <div data-wt-promos="card"></div>                        the main promo
      <div data-wt-promos="card" data-offer="finance"></div>   one offer by id
+     <div data-wt-promos="double"></div>                      main promo + finance, side by side
+     <div data-wt-promos="double" data-offer="motorisation,finance"></div>   pick both by id
    ===================================================================== */
 (function () {
   'use strict';
@@ -43,6 +46,7 @@
     "@media(prefers-reduced-motion:reduce){.wto .btn{transition:none}.wto .btn:hover{transform:none}}",
     ".wto .offers{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:0;padding:0;list-style:none}",
     ".wto .offers.single{grid-template-columns:1fr}",
+    ".wto .offers.double .offer .ph{height:200px}",
     ".wto .offer{display:flex;flex-direction:column;background:#fff;border:2px solid var(--line);border-radius:20px;padding:clamp(22px,2.6vw,32px)}",
     ".wto .offer.feature{grid-column:1/-1;border-color:var(--teal);background:var(--teal-lt);display:grid;grid-template-columns:1.02fr 1fr;gap:clamp(22px,3vw,42px);align-items:stretch}",
     ".wto .offer.feature.noimg{grid-template-columns:1fr}",
@@ -163,6 +167,12 @@
       '<div class="body">' + body + '</div></li>';
   }
 
+  // the main promo = first live 'feature' offer, else first live offer
+  function mainOffer(offers) {
+    var active = offers.filter(live);
+    return active.filter(function (x) { return x.style === 'feature'; })[0] || active[0];
+  }
+
   function listHTML(offers) {
     // live offers first (in file order), finished ones at the bottom
     var shown = offers.filter(started);
@@ -232,10 +242,24 @@
 
     card: function (el, offers) {
       var id = el.getAttribute('data-offer');
-      var o = offers.filter(function (x) { return x.id === id; })[0];
+      var o = id ? offers.filter(function (x) { return x.id === id; })[0] : mainOffer(offers);
       if (!o || !live(o)) { el.innerHTML = ''; el.hidden = true; return; }
       el.innerHTML = '<div class="wto"><ul class="offers single">' +
         cardHTML(Object.assign({}, o, { style: o.style === 'feature' ? 'feature' : 'accent' }), false) + '</ul></div>';
+    },
+
+    double: function (el, offers) {
+      var active = offers.filter(live);
+      var main = mainOffer(offers);
+      var ids = (el.getAttribute('data-offer') || '').split(',').map(function (x) { return x.trim(); }).filter(Boolean);
+      var picks = ids.length
+        ? ids.map(function (id) { return active.filter(function (x) { return x.id === id; })[0]; })
+        : [main, active.filter(function (x) { return x.id === 'finance'; })[0] ||
+            active.filter(function (x) { return x !== main; })[0]];
+      picks = picks.filter(Boolean).slice(0, 2);
+      if (!picks.length) { el.innerHTML = ''; el.hidden = true; return; }
+      el.innerHTML = '<div class="wto"><ul class="offers double' + (picks.length === 1 ? ' single' : '') + '">' +
+        picks.map(function (o) { return cardHTML(Object.assign({}, o, { style: 'accent' }), false); }).join('') + '</ul></div>';
     },
 
     banner: function (el, offers) {
