@@ -9,6 +9,8 @@
      <div data-wt-promos="page"></div>      full /offers page
      <div data-wt-promos="offers"></div>    just the offer cards
      <div data-wt-promos="banner"></div>    slim strip, links to /offers
+   The site-wide strip needs no placeholder: it is added to every page
+   automatically (strip: true in offers.js) and is fixed to the top.
      <div data-wt-promos="card"></div>                        the main promo
      <div data-wt-promos="card" data-slot="secondary"></div>  the second promo
      <div data-wt-promos="double"></div>                      main + second promo, side by side
@@ -111,6 +113,8 @@
     /* banner (new) */
     ".wto-banner{display:flex;align-items:center;justify-content:center;gap:10px 16px;flex-wrap:wrap;background:#00a3b1;color:#fff!important;border-radius:14px;padding:14px 20px;font-family:'Alan Sans',-apple-system,'Segoe UI',sans-serif;font-size:16px;line-height:1.35;text-align:center;text-decoration:none!important}",
     ".wto-banner:hover{background:#00808c}",
+    ".wto-strip{position:fixed;top:0;left:0;right:0;z-index:9999}",
+    ".wto-strip .wto-banner{border-radius:0;padding:9px 16px;font-size:15px;line-height:1.3}",
     ".wto-banner:focus-visible{outline:3px solid #00808c;outline-offset:3px}",
     ".wto-banner strong{font-weight:700;color:#fff!important}",
     ".wto-banner .when{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:#fff;color:#00808c;border-radius:999px;padding:4px 10px}",
@@ -199,6 +203,59 @@
     return '<section class="panel"><div class="head"><p class="eyebrow">What\'s on</p>' +
       '<' + tag + '>Current Promotions</' + tag + '>' +
       '<p class="lede">We don\'t run a sale every week. When we do, it\'s a real saving and it has an end date on it.</p></div></section>';
+  }
+
+  function bannerLinkHTML(o) {
+    var cd = countdown(o);
+    return '<a class="wto-banner" data-offer="' + esc(o.id) + '" href="' + OFFERS_PAGE + '">' +
+      (cd ? '<span class="when">' + esc(cd.text) + '</span>' : '') +
+      '<strong>' + esc(o.banner || o.title) + '</strong><span class="go">See current offers</span></a>';
+  }
+
+  /* ---------- site-wide strip: fixed to the top of every page, links to /offers ---------- */
+  var STRIP_ID = 'wt-promos-strip';
+
+  function stripOffset(h) {
+    document.body.style.marginTop = h ? h + 'px' : '';
+    // push down the site's own header if it is fixed/sticky so the strip doesn't cover it
+    var hd = document.querySelector('#header, header.header');
+    if (!hd) return;
+    var pos = window.getComputedStyle(hd).position;
+    if (h && (pos === 'fixed' || pos === 'sticky')) hd.style.top = h + 'px';
+    else if (!h) hd.style.top = '';
+  }
+
+  function updateStrip(data) {
+    var old = document.getElementById(STRIP_ID);
+    var path = location.pathname.replace(/\/+$/, '') || '/';
+    var hideOn = data.stripHideOn || ['/offers'];
+    var o = data.strip ? mainOffer(data.offers) : null;
+    if (!o || hideOn.indexOf(path) > -1) {
+      if (old) old.remove();
+      stripOffset(0);
+      return;
+    }
+    addStyles();
+    if (!old) {
+      old = document.createElement('div');
+      old.id = STRIP_ID;
+      old.className = 'wto-strip';
+      document.body.insertBefore(old, document.body.firstChild);
+      old.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href]');
+        if (a) track('offer_click', { offer: nameFor(a), placement: 'strip' });
+      }, { passive: true });
+      window.addEventListener('resize', function () {
+        var el = document.getElementById(STRIP_ID);
+        if (el) stripOffset(el.offsetHeight);
+      });
+    }
+    old.innerHTML = bannerLinkHTML(o);
+    stripOffset(old.offsetHeight);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () {
+      var el = document.getElementById(STRIP_ID);
+      if (el) stripOffset(el.offsetHeight);
+    });
   }
 
   function listHTML(offers) {
@@ -300,10 +357,7 @@
       var o = id ? active.filter(function (x) { return x.id === id; })[0]
         : (active.filter(function (x) { return x.style === 'feature'; })[0] || active[0]);
       if (!o) { el.innerHTML = ''; el.hidden = true; return; }
-      var cd = countdown(o);
-      el.innerHTML = '<a class="wto-banner" data-offer="' + esc(o.id) + '" href="' + OFFERS_PAGE + '">' +
-        (cd ? '<span class="when">' + esc(cd.text) + '</span>' : '') +
-        '<strong>' + esc(o.banner || o.title) + '</strong><span class="go">See current offers</span></a>';
+      el.innerHTML = bannerLinkHTML(o);
     }
   };
 
@@ -346,7 +400,9 @@
   function renderAll() {
     var data = window.WT_PROMOS;
     var slots = document.querySelectorAll('[data-wt-promos]');
-    if (!slots.length || !data || !data.offers) return;
+    if (!data || !data.offers) return;
+    updateStrip(data);
+    if (!slots.length) return;
     addStyles();
     slots.forEach(function (el) {
       var fn = RENDER[el.getAttribute('data-wt-promos')];

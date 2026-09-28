@@ -40,6 +40,14 @@ Advanced: `data-offer="some-id"` pins a card to one offer by its `id` (e.g. `dat
 
 A card or banner hides itself when its offer ends. If one offer in a double card ends, the other shows on its own.
 
+## Site-wide strip (automatic)
+
+A slim strip is fixed to the top of every page and links to /offers. It shows the main promo and hides itself when nothing is live. No Code Block needed: the footer script adds it.
+
+- Turn off: `strip: false` in offers.js.
+- Skip pages: edit `stripHideOn` in offers.js (default `['/offers']`).
+- If the site header is fixed or sticky, the script moves it down so the strip doesn't cover it. Check the header on desktop and mobile after going live.
+
 ## /offers page: search-friendly text
 
 Put this text *inside* the page placeholder. Search engines that don't run JavaScript read it; visitors never see it because the script replaces it with the styled page. It has no dates, so it doesn't need updating monthly.

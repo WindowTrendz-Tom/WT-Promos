@@ -15,6 +15,12 @@
 
 window.WT_PROMOS = {
 
+  // Site-wide strip fixed to the top of every page, linking to /offers.
+  // Shows the main promo. Set strip: false to turn it off.
+  strip: true,
+  stripHideOn: ['/offers'],        // pages where the strip is not shown
+
+
   offers: [
 
     {
