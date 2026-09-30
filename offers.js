@@ -23,38 +23,18 @@ window.WT_PROMOS = {
 
   offers: [
 
-    {
-      id: 'motorisation',
-      style: 'feature',            // 'feature' = big hero card, 'accent' = teal outline, '' = plain
-      starts: '',
-      ends: '2026-09-30',
-      tags: [],                    // countdown tag is added automatically when there's an end date
-      title: 'Free motorisation upgrade on blinds',
-      description: 'Get the motorisation upgrade free on Windoware Honeycomb, Mikronwood Venetian and Windoware Roller Blinds. One button instead of a cord, a cleaner finish, and no chains for small children to get tangled in.',
-      worth: 'Worth around $210 a blind',
-      image: 'https://images.squarespace-cdn.com/content/v1/5f12259b5fdfd353a85c5f79/56f4c0b2-d649-4204-97ae-bb2f4bd6e70b/26-112+Churcher+Street-73.jpg?format=1000w',
-      imageAlt: 'Motorised blinds in a Palmerston North living room',
-      imagePosition: 'center 35%',  // which part of the photo stays visible when cropped: 'center top', 'center 30%', 'center bottom'...
-      buttonText: 'Book a free measure & quote',
-      buttonLink: '/free-quote',
-      mention: 'Mention the motorisation offer when we visit.',
-      termsTitle: 'Terms apply',
-      terms: 'Available until 30 September 2026. Not available on existing orders, and cannot be used in conjunction with another offer on the same product.',
-      banner: 'Free motorisation upgrade on blinds — worth around $210 a blind'
-    },
-
     // ---- OCTOBER 2026 DRAFT: hidden until 1 Oct. Check ends date and terms before this goes live. ----
     {
       id: 'curtain-making',
-      style: 'feature',            // takes over as the main promo when the motorisation offer ends on 30 Sep
+      style: 'feature',            // 'feature' = big hero card, 'accent' = teal outline, '' = plain
       starts: '2026-10-01',
       ends: '2026-10-31',          // CONFIRM end date
       tags: [],
       title: 'Free curtain making on James Dunlop fabrics',
-      description: 'Choose a James Dunlop fabric for your curtains and we make them for free. Same quality, same local team measuring and installing, with the making cost taken off.',
+      description: 'Choose a James Dunlop fabric for your curtains this October and we make them for free. This is your last chance to get curtains in time for Christmas.',
       worth: '',
-      image: '',                   // add a Squarespace image link here if you want a photo on this card
-      imageAlt: '',
+      image: 'https://images.squarespace-cdn.com/content/5f12259b5fdfd353a85c5f79/3f2b6dcd-d6bd-474f-951f-090bb05ffc9a/james-dunlop-lumiere-bamboo.webp?content-type=image%2Fwebp',
+      imageAlt: 'Sheer James Dunlop Lumiere Bamboo curtains hanging at French doors',
       buttonText: 'Book a free measure & quote',
       buttonLink: '/free-quote',
       mention: 'Mention the free curtain making offer when we visit.',
