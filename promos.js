@@ -65,7 +65,7 @@
     ".wto .offer.feature.noimg{grid-template-columns:1fr}",
     ".wto .offer.feature .body{display:flex;flex-direction:column;justify-content:center}",
     ".wto .offer.feature .act{margin-top:0}",
-    ".wto .offer.feature .ph{height:100%;min-height:300px;margin:0}",
+    ".wto .offer.feature .ph{height:clamp(300px,32vw,400px);max-height:400px;margin:0;align-self:center}",
     ".wto .offer.feature .act .btn{width:auto;min-width:290px}",
     ".wto .offer.feature .mention{text-align:left}",
     ".wto .offer.accent{border-color:var(--teal)}",
