@@ -51,7 +51,7 @@ window.WT_PROMOS = {
       ends: '2026-10-31',          // CONFIRM end date
       tags: [],
       title: 'Free curtain making on James Dunlop fabrics',
-      description: 'Choose a James Dunlop fabric for your curtains and we make them for free. Same quality, same local team measuring and installing, with the making cost taken off.',
+      description: 'Choose a James Dunlop fabric for your curtains this October and we make them for free. This is your last chance to get curtains in time for Christmas.',
       worth: '',
       image: '',                   // add a Squarespace image link here if you want a photo on this card
       imageAlt: '',
