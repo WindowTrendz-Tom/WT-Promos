@@ -53,8 +53,8 @@ window.WT_PROMOS = {
       title: 'Free curtain making on James Dunlop fabrics',
       description: 'Choose a James Dunlop fabric for your curtains this October and we make them for free. This is your last chance to get curtains in time for Christmas.',
       worth: '',
-      image: '',                   // add a Squarespace image link here if you want a photo on this card
-      imageAlt: '',
+      image: 'https://images.squarespace-cdn.com/content/5f12259b5fdfd353a85c5f79/3f2b6dcd-d6bd-474f-951f-090bb05ffc9a/james-dunlop-lumiere-bamboo.webp?content-type=image%2Fwebp',
+      imageAlt: 'Sheer James Dunlop Lumiere Bamboo curtains hanging at French doors',
       buttonText: 'Book a free measure & quote',
       buttonLink: '/free-quote',
       mention: 'Mention the free curtain making offer when we visit.',
