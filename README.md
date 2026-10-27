@@ -13,6 +13,10 @@ Tips:
 - `starts: '2026-11-01'` hides an offer until that date, so you can load next month early.
 - The first offer with `style: 'feature'` is the big one and the one in site-wide banners.
 
+## Preview next month's offers
+
+On any Vercel preview or `wt-promos.vercel.app` page, add `?date=YYYY-MM-DD` to the URL to see the promos as they will look on that day, e.g. `https://wt-promos.vercel.app/?date=2026-11-01`. It only works on `*.vercel.app` addresses, so it does nothing on the live Squarespace site.
+
 ## Squarespace setup (once)
 
 **Site-wide script** — Settings > Advanced > Code Injection > Footer:
