@@ -134,7 +134,12 @@
     var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(str || '').trim());
     return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
   }
-  function today() { var n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); }
+  // Preview only: on a *.vercel.app page, ?date=YYYY-MM-DD shows the offers as they will look on that day.
+  var PREVIEW = /\.vercel\.app$/.test(location.hostname);
+  var PREVIEW_DATE = PREVIEW ? toDate((/[?&]date=([\d-]+)/.exec(location.search) || [])[1]) : null;
+  function today() { var n = PREVIEW_DATE || new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); }
+  // Preview only: load offer images from this deployment, so new images show before they reach production.
+  function imgSrc(u) { return PREVIEW ? String(u).replace('https://wt-promos.vercel.app/', BASE) : u; }
   function daysLeft(o) { var e = toDate(o.ends); return e ? Math.round((e - today()) / 86400000) : null; }
   function started(o) { var s = toDate(o.starts); return !s || s <= today(); }
   function expired(o) { var d = daysLeft(o); return d !== null && d < 0; }
@@ -163,7 +168,7 @@
       (o.tags || []).map(function (t) {
         return '<span class="tag' + (t.soft ? ' soft' : '') + '">' + esc(t.text) + '</span>';
       }).join('');
-    var img = o.image ? '<div class="ph"><img src="' + esc(o.image) + '" alt="' + esc(o.imageAlt) +
+    var img = o.image ? '<div class="ph"><img src="' + esc(imgSrc(o.image)) + '" alt="' + esc(o.imageAlt) +
       '" width="1000" height="667" decoding="async"' +
       (o.imagePosition ? ' style="object-position:' + esc(o.imagePosition) + '"' : '') + (eager ? ' fetchpriority="high"' : ' loading="lazy"') + '></div>' : '';
     var cls = ['offer'];
