@@ -23,6 +23,27 @@ window.WT_PROMOS = {
 
   offers: [
 
+    // ---- NOVEMBER 2026: hidden until 1 Nov, then replaces October as the main promo. Check ends date and terms before this goes live. ----
+    {
+      id: 'sunscreen-25',
+      style: 'feature',
+      starts: '2026-11-01',
+      ends: '',                    // CONFIRM end date (blank = no countdown, never expires)
+      tags: [],
+      title: '25% off sunscreen roller blinds',
+      description: "Summer is on its way. Take 25% off sunscreen roller blinds to cut the glare and keep the view. Made and installed locally, so you're sorted before the heat arrives.",
+      worth: '',
+      image: 'https://wt-promos.vercel.app/sunscreen-roller-blind.webp',
+      imageAlt: 'Sunscreen roller blind partly lowered over a black-framed window above a lounge sofa',
+      imagePosition: '50% 20%',
+      buttonText: 'Book a free measure & quote',
+      buttonLink: '/free-quote',
+      mention: 'Mention the sunscreen offer when we visit.',
+      termsTitle: 'Terms apply',
+      terms: 'Applies to sunscreen roller blinds only. Not available on existing orders, and cannot be used in conjunction with another offer on the same product.',   // CONFIRM terms and end date
+      banner: '25% off sunscreen roller blinds'
+    },
+
     // ---- OCTOBER 2026 DRAFT: hidden until 1 Oct. Check ends date and terms before this goes live. ----
     {
       id: 'curtain-making',
