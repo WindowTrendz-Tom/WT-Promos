@@ -28,7 +28,7 @@ window.WT_PROMOS = {
       id: 'sunscreen-25',
       style: 'feature',
       starts: '2026-11-01',
-      ends: '',                    // CONFIRM end date (blank = no countdown, never expires)
+      ends: '2026-11-30',
       tags: [],
       title: '25% off sunscreen roller blinds',
       description: "Summer is on its way. Take 25% off sunscreen roller blinds to cut the glare and keep the view. Made and installed locally, so you're sorted before the heat arrives.",
@@ -40,7 +40,7 @@ window.WT_PROMOS = {
       buttonLink: '/free-quote',
       mention: 'Mention the sunscreen offer when we visit.',
       termsTitle: 'Terms apply',
-      terms: 'Applies to sunscreen roller blinds only. Not available on existing orders, and cannot be used in conjunction with another offer on the same product.',   // CONFIRM terms and end date
+      terms: 'Available until 30 November 2026. Applies to sunscreen roller blinds only. Not available on existing orders, and cannot be used in conjunction with another offer on the same product.',   // CONFIRM terms
       banner: '25% off sunscreen roller blinds'
     },
 
